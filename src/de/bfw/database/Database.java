@@ -24,4 +24,17 @@ public class Database {
 
         return result;
     }
+
+    public int update(String sql, Object...args) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement(sql);
+
+        int index = 1;
+        for(Object object : args){
+            preparedStatement.setObject(index, object);
+
+            index++;
+        }
+
+        return preparedStatement.executeUpdate();
+    }
 }
