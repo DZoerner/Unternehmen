@@ -10,9 +10,14 @@ import java.util.List;
 public class TestWithList {
 
     public static void main(String[] args) {
+        String db = "unternehmen";
+
+        if(args.length > 0){
+            db = args[0];
+        }
 
         try {
-            Database database = new Database("jdbc:mysql://localhost/unternehmen", "root", "");
+            Database database = new Database("jdbc:mysql://localhost/" + db, "root", "");
 
             List<Kunde> kunden = database.query("SELECT Name FROM kunde", new KundeRowHandler());
 
