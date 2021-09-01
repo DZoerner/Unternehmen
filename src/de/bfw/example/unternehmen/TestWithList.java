@@ -2,7 +2,7 @@ package de.bfw.example.unternehmen;
 
 import de.bfw.database.Database;
 import de.bfw.example.unternehmen.data.Kunde;
-import de.bfw.example.unternehmen.data.KundeRowHandler;
+import de.bfw.example.unternehmen.data.KundeQuery;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -19,7 +19,7 @@ public class TestWithList {
         try {
             Database database = new Database("jdbc:mysql://localhost/" + db, "root", "");
 
-            List<Kunde> kunden = database.query("SELECT Name FROM kunde", new KundeRowHandler());
+            List<Kunde> kunden = database.query(new KundeQuery());
 
             System.out.println(kunden.size() + " Kunden found.");
 

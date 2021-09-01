@@ -16,6 +16,7 @@ public class NeuerKunde {
             exit(-1);
         }
 
+
         db = args[0];
 
         try {

@@ -13,16 +13,24 @@ public class Database {
         stmt = conn.createStatement();
     }
 
-    public <T> List<T> query(String sql, RowHandler<T> rowHandler) throws SQLException {
+    public <T> List<T> query(Query<T> query) throws SQLException {
         List<T> result = new ArrayList<>();
 
-        ResultSet resultSet = stmt.executeQuery(sql);
+        ResultSet resultSet = stmt.executeQuery(query.query());
 
         while(resultSet.next()){
-            result.add(rowHandler.handleRow(resultSet));
+            result.add(query.handleRow(resultSet));
         }
 
         return result;
+    }
+
+    public <T> T queryFirst(Query<T> query) throws SQLException {
+        ResultSet resultSet = stmt.executeQuery(query.query());
+
+        resultSet.next();
+
+        return query.handleRow(resultSet);
     }
 
     public int update(String sql, Object...args) throws SQLException {
